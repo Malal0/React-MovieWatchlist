@@ -1,5 +1,7 @@
+import { useState } from 'react'
 function Navbar(props) {
-    const { handleClick } = props
+    const { handleClick, searchValue, handleInput } = props
+
     return (
         <nav className="navbar">
             <ul className="nav-list container">
@@ -12,7 +14,15 @@ function Navbar(props) {
             </ul>
             <div className="search-container container">
                 <i className="fa-solid fa-search"></i>
-                <input className="search-input" id="search-input" type="text" placeholder="Search for a movie" />
+                <input
+                    className="search-input"
+                    id="search-input"
+                    placeholder="Search for a movie"
+                    type="text"
+                    name="search-input"
+                    value={searchValue}
+                    onChange={handleInput}
+                />
                 <button className="search-btn" id="search-btn" onClick={handleClick}>Search</button>
             </div>
         </nav>
