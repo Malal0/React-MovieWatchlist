@@ -268,3 +268,20 @@ a {
   width: clamp(150px, 90%, 900px);
   margin: auto;
 }
+
+.clear-reults-btn {
+  background-color: #ff3838;
+  border: none;
+  padding: .5em 1.5em;
+  border-radius: 10px;
+  color: hsl(216, 12%, 100%);
+  font-weight: 600;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.clear-reults-btn .fa-solid {
+  margin-right: .5em;
+  font-size: 1.25rem;
+}

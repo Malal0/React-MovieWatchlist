@@ -42,7 +42,10 @@ function App() {
         <div className="default-content-container" id="content-container">
           {movies.length ?
             <>
-              <button onClick={() => setMovies([])}>clear results</button>
+              <button className='clear-reults-btn' onClick={() => setMovies([])}>
+                <i className="fa-solid fa-remove"></i>
+                clear results
+              </button>
               {movies.map(obj => <Movie key={obj.imdbID} {...obj} />)}
             </> :
             <div className="default-content">
