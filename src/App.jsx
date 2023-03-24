@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react'
 import Navbar from "./components/Navbar"
 import Movie from "./components/Movie"
-import { SearchProvider, SearchContext } from './SearchProvider'
+import { SearchContext } from './searchContext'
 
 
 function App() {
   const [movies, setMovies] = useState([])
-  const { searchInput, handleInput } = useContext(SearchContext)
+  const { searchInput } = useContext(SearchContext)
 
   function getMovies() {
     setMovies([])
@@ -27,7 +27,6 @@ function App() {
     fetch(`https://www.omdbapi.com/?apikey=beba8703&i=${id}&plot=short`, { method: "GET" })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setMovies(prevMovies => [...prevMovies, data]);
       })
   }
@@ -37,14 +36,15 @@ function App() {
       <header>
         <Navbar
           handleClick={getMovies}
-          searchValue={searchInput}
-          handleInput={handleInput}
         />
       </header>
       <main className="container" id="main">
         <div className="default-content-container" id="content-container">
           {movies.length ?
-            movies.map(obj => <Movie key={obj.imdbID} {...obj} />) :
+            <>
+              <button onClick={() => setMovies([])}>clear results</button>
+              {movies.map(obj => <Movie key={obj.imdbID} {...obj} />)}
+            </> :
             <div className="default-content">
               <i className="fa-solid fa-film"></i>
               <p>Start exploring</p>

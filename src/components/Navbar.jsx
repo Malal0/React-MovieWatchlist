@@ -1,5 +1,9 @@
+import { useContext } from 'react'
+import { SearchContext } from "../searchContext"
+
 function Navbar(props) {
-    const { handleClick, searchValue, handleInput } = props
+    const { handleClick } = props
+    const { searchInput, handleInput } = useContext(SearchContext)
 
     return (
         <nav className="navbar">
@@ -19,7 +23,7 @@ function Navbar(props) {
                     placeholder="Search for a movie"
                     type="text"
                     name="search-input"
-                    value={searchValue}
+                    value={searchInput}
                     onChange={handleInput}
                 />
                 <button className="search-btn" id="search-btn" onClick={handleClick}>Search</button>
