@@ -265,23 +265,29 @@ a {
 /////////////////////////////////////////////////////////////*/
 
 .container {
-  width: clamp(150px, 90%, 900px);
   margin: auto;
+  width: clamp(150px, 90%, 900px);
 }
 
 .clear-reults-btn {
-  background-color: #ff3838;
+  background-color: #ff6363;
   border: none;
-  padding: .5em 1.5em;
   border-radius: 10px;
   color: hsl(216, 12%, 100%);
+  cursor: pointer;
   font-weight: 600;
   margin-left: auto;
+  padding: .5em 1.5em;
   display: flex;
   align-items: center;
 }
 
+.clear-reults-btn:hover {
+  background-color: #ff3838;
+  transform: translateY(-3px);
+}
+
 .clear-reults-btn .fa-solid {
-  margin-right: .5em;
   font-size: 1.25rem;
+  margin-right: .5em;
 }

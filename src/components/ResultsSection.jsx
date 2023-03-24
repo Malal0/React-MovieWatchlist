@@ -12,8 +12,14 @@ function ResultsSection({ searchResults }) {
     return (
         <main className="container" id="main">
             <div className="default-content-container" id="content-container">
-                {resultsArr.length ?
-                    <p>results</p> :
+                {movies.length ?
+                    <>
+                        <button className='clear-reults-btn' onClick={() => setMovies([])}>
+                            <i className="fa-solid fa-remove"></i>
+                            clear results
+                        </button>
+                        {movies.map(obj => <Movie key={obj.imdbID} {...obj} />)}
+                    </> :
                     <div className="default-content">
                         <i className="fa-solid fa-film"></i>
                         <p>Start exploring</p>

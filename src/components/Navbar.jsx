@@ -1,9 +1,10 @@
 import { useContext } from 'react'
-import { SearchContext } from "../searchContext"
+import { SearchContext } from "../contexts/searchContext"
+import { MovieContext } from '../contexts/moviesContext'
 
-function Navbar(props) {
-    const { handleClick } = props
+function Navbar() {
     const { searchInput, handleInput } = useContext(SearchContext)
+    const { getMovies } = useContext(MovieContext)
 
     return (
         <nav className="navbar">
@@ -26,7 +27,7 @@ function Navbar(props) {
                     value={searchInput}
                     onChange={handleInput}
                 />
-                <button className="search-btn" id="search-btn" onClick={handleClick}>Search</button>
+                <button className="search-btn" id="search-btn" onClick={() => getMovies(searchInput)}>Search</button>
             </div>
         </nav>
     )
