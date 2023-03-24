@@ -1,4 +1,3 @@
-import { useState } from 'react'
 function Navbar(props) {
     const { handleClick, searchValue, handleInput } = props
 

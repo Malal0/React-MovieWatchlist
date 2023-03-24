@@ -1,65 +1,59 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import Navbar from "./components/Navbar"
-import ResultsSection from "./components/ResultsSection"
-function App() {
-  const [resultsData, setResultsData] = useState([])
-  const [searchInput, setSearchInput] = useState('')
+import Movie from "./components/Movie"
+import { SearchProvider, SearchContext } from './SearchProvider'
 
-  function handleInput(e) {
-    setSearchInput(e.target.value)
+
+function App() {
+  const [movies, setMovies] = useState([])
+  const { searchInput, handleInput } = useContext(SearchContext)
+
+  function getMovies() {
+    setMovies([])
+    fetch(`https://www.omdbapi.com/?apikey=beba8703&s=${searchInput}&type=movie`, { method: "GET" })
+      .then(res => res.json())
+      .then(data => {
+        let idArray = data.Search.map(movie => movie.imdbID)
+        idArray.forEach(id => {
+          getMovie(id);
+        })
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   }
 
-  // console.log(resultsData.Search)
-
-  function search() {
-    fetch(`https://www.omdbapi.com/?apikey=beba8703&s=${searchInput}`)
-      .then(res => {
-        if (res.ok) {
-          console.log(res)
-          return res.json()
-        } else {
-          console.log("response error")
-          throw new Error
-        }
-      })
+  function getMovie(id) {
+    fetch(`https://www.omdbapi.com/?apikey=beba8703&i=${id}&plot=short`, { method: "GET" })
+      .then(res => res.json())
       .then(data => {
-        if (data.Response === "True") {
-          console.log(data)
-          setResultsData([])
-          setResultsData(data)
-        } else {
-          console.log("data error")
-          throw new Error
-        }
+        console.log(data);
+        setMovies(prevMovies => [...prevMovies, data]);
       })
-      .catch(error => console.log(error))
   }
 
   return (
     <div className="App">
       <header>
         <Navbar
-          handleClick={search}
+          handleClick={getMovies}
           searchValue={searchInput}
           handleInput={handleInput}
         />
       </header>
-      <ResultsSection
-        searchResults={resultsData}
-      />
+      <main className="container" id="main">
+        <div className="default-content-container" id="content-container">
+          {movies.length ?
+            movies.map(obj => <Movie key={obj.imdbID} {...obj} />) :
+            <div className="default-content">
+              <i className="fa-solid fa-film"></i>
+              <p>Start exploring</p>
+            </div>
+          }
+        </div>
+      </main>
     </div>
   )
 }
 
 export default App
-
-/*
-      <h1>Hello New Project</h1>
-
-      // useEffect(() => {
-      //   fetch("https://www.omdbapi.com/?apikey=beba8703&s=veggietales")
-      //     .then(res => res.json())
-      //     .then(data => setResultsData(data))
-      //     .catch(error => console.log(error))
-      // }, [])
-*/
