@@ -248,9 +248,30 @@ a {
   cursor: pointer;
 }
 
+.watchlisted {
+  background-color: #ff6363;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: .5em 1em;
+}
+
+.watchlisted:hover.toggle-watchlist-btn .fa-solid {
+  color: #ffffff;
+}
+
+.watchlisted:hover {
+  background-color: #ff3838;
+}
+
 .toggle-watchlist-btn .fa-solid {
   font-size: 1.25em;
   pointer-events: none;
+}
+
+.toggle-watchlist-btn:hover .fa-solid {
+  color: #ff3838;
 }
 
 .movie-description {
@@ -273,7 +294,7 @@ a {
   background-color: #ff6363;
   border: none;
   border-radius: 10px;
-  color: hsl(216, 12%, 100%);
+  color: #ffffff;
   cursor: pointer;
   font-weight: 600;
   margin-left: auto;

@@ -6,7 +6,7 @@ import { MovieContext } from './contexts/moviesContext'
 
 function App() {
   const { movies, removeMovies } = useContext(MovieContext)
-
+  console.log(movies[0])
   return (
     <div className="App">
       <header>
